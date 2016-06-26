@@ -40,7 +40,10 @@ view cart =
 
     clearCartButton =
       if (List.length cart.items) > 0 then
-        button [ class "btn btn--full", onClick ClearCart ] [ text "Clear Cart" ]
+        div []
+          [ button [ class "btn btn--full u-mb-", onClick ClearCart ] [ text "Clear Cart" ]
+          , a [ href "/#/checkout", class "btn btn--full" ] [ text "checkout" ]
+          ]
       else
         text ""
   in
