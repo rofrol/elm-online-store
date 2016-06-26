@@ -4,7 +4,6 @@ module Components.Home.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 
 -- OUR MODULES
 
@@ -15,5 +14,5 @@ import App.Types exposing (Msg(..))
 view : Html Msg
 view =
   div [ class "layout layout--center" ]
-    [ button [ class "btn", onClick (NavigateTo "menu") ] [ text "Begin Order"]
+    [ a [ href "/#/menu", class "btn" ] [ text "Begin Order" ]
     ]
