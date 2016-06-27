@@ -11,7 +11,7 @@ import Components.Counter.Update as Counter
 
 update : Msg -> Menu -> (Menu , Cmd Msg)
 update msg model =
-  case (Debug.log "Menu.Update" msg) of
+  case msg of
     UpdateItemQty id msg ->
       let
         updateItem item =

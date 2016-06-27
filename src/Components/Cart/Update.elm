@@ -9,7 +9,7 @@ import Components.Cart.Api exposing (getCart, clearCart, addItem)
 
 update : Msg -> Cart -> (Cart, Cmd Msg)
 update msg model =
-  case (Debug.log "Cart.Update" msg) of
+  case msg of
     GetCart ->
       cartLoading
       ! [ getCart ]
