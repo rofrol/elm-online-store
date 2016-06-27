@@ -25,6 +25,7 @@ type Route
 
 type Msg
   = NoOp
+  | ToggleDebugger 
   | NavigateTo String
   | SetQuery Query
   | MenuMsg Components.Menu.Types.Msg
