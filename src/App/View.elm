@@ -18,8 +18,11 @@ import Components.Menu.View as Menu
 view : Model -> Html Msg
 view model =
   div [ class "u-m++" ]
-    [ div [ class "u-mt u-mb+", onClick NoOp ]
+    [ div [ class "u-mt u-mb+" ]
       [ h1 [ class "u-txt-c" ] [text "Elm Online Store Example"]
+      , div [ class "u-txt-c u-pb" ]
+        [ button [ class "btn", onClick ToggleDebugger ] [ text "DEBUG" ]
+        ]
       , text ("Model: " ++ toString model)
       ]
     , pageView model model.route

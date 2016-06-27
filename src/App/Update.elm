@@ -14,14 +14,18 @@ import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Menu.Types as MenuTypes
 import Components.Menu.Update as MenuUpdate
 import Components.Cart.Types as CartTypes
+import Ports.Debug exposing (debug)
 
 -- UPDATE
 
 update : Msg -> Model -> (Model , Cmd Msg)
 update msg model =
-  case (Debug.log "App.Update" msg) of
+  case msg of
     NoOp ->
       model ! []
+
+    ToggleDebugger ->
+      model ! [ debug True ]
 
     -- NAV
 
@@ -63,7 +67,7 @@ urlUpdate ( route, location ) model =
     newModel =
       { model | route = route, location = location }
   in
-    case (Debug.log "App.urlUpdate" route) of
+    case route of
       NotFoundRoute
         -> newModel ! []
       MainRoute
