@@ -13,6 +13,6 @@ import App.Types exposing (Msg(..))
 
 view : Html Msg
 view =
-  div [ class "layout layout--center" ]
+  div [ class "u-txt-c" ]
     [ a [ href "/#/menu", class "btn" ] [ text "Begin Order" ]
     ]
