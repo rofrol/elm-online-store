@@ -12,21 +12,30 @@ import Html.App as App
 import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Home.View as Home
 import Components.Menu.View as Menu
+import Components.Checkout.View as Checkout
 
 -- VIEW
 
 view : Model -> Html Msg
 view model =
-  div [ class "u-m++" ]
-    [ div [ class "u-mt u-mb+" ]
-      [ h1 [ class "u-txt-c" ] [text "Elm Online Store Example"]
-      , div [ class "u-txt-c u-pb" ]
+  let
+    debugButtonStyles =
+      [ ("position", "absolute")
+      , ("top", "0")
+      , ("left", "0")
+      ]
+  in
+    div []
+      [ div [ style debugButtonStyles ]
         [ button [ class "btn", onClick ToggleDebugger ] [ text "DEBUG" ]
         ]
-      , text ("Model: " ++ toString model)
+      , div [ class "u-m++" ]
+        [ div [ class "u-mt u-mb+" ]
+          [ h1 [ class "u-txt-c" ] [text "Elm Online Store Example"]
+          ]
+        , pageView model model.route
+        ]
       ]
-    , pageView model model.route
-    ]
 
 pageView : Model -> Route -> Html Msg
 pageView model route =
