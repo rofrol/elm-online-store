@@ -4,12 +4,12 @@ module App.Nav exposing (urlParser, routerConfig)
 
 import Navigation
 import Hop.Types exposing (Location, Config, PathMatcher)
-import Hop.Matchers exposing (match1)
+import Hop.Matchers exposing (match1, nested1)
 import Hop exposing (matchUrl)
 
 -- OUR MODULES
 
-import App.Types exposing (Model, Route(..), Msg(..))
+import App.Types exposing (Model, Route(..), CheckoutSubRoute(..), Msg(..))
 
 -- CONFIG
 
@@ -25,10 +25,18 @@ routerConfig =
 
 matchers : List (PathMatcher Route)
 matchers =
-    [ match1 MainRoute ""
-    , match1 AboutRoute "/about"
-    , match1 MenuRoute "/menu"
-    ]
+  [ match1 MainRoute ""
+  , match1 AboutRoute "/about"
+  , match1 MenuRoute "/menu"
+  , nested1 CheckoutRoute "/checkout" checkoutMatchers
+  ]
+
+checkoutMatchers : List (PathMatcher CheckoutSubRoute)
+checkoutMatchers =
+  [ match1 SelectPayment "/select-payment"
+  , match1 CheckoutSummary "/summary"
+  ]
+
 
 -- PARSER
 

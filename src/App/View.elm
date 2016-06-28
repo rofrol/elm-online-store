@@ -51,3 +51,6 @@ pageView model route =
 
     MenuRoute ->
       App.map MenuMsg (Menu.view model.menu)
+
+    CheckoutRoute route ->
+      App.map CheckoutMsg (Checkout.view route model.menu.cart)

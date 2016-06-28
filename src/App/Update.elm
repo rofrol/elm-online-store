@@ -58,6 +58,11 @@ update msg model =
         { model | menu = newMenu }
         ! [ Cmd.map MenuMsg cmdMsg ]
 
+    -- Checkout
+
+    CheckoutMsg msg ->
+      model ! []
+
 
 -- URL UPDATE
 
@@ -77,3 +82,5 @@ urlUpdate ( route, location ) model =
       MenuRoute
         -> update (MenuMsg MenuTypes.GetMenu) newModel
         :> update (MenuMsg (MenuTypes.CartMsg CartTypes.GetCart))
+      CheckoutRoute route
+        -> newModel ! []
