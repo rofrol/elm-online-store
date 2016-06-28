@@ -33,16 +33,16 @@ view cart =
     cartItemView item =
       div [ class "layout__item" ]
         [ div [ class "spread u-pb" ]
-          [ span [class "spread_l"] [ text ((toString item.qty) ++ " " ++ item.name) ]
-          , span [class "spread_r"] [ text ("$" ++ (toString (item.price * item.qty))) ]
+          [ span [class "spread__l"] [ text ((toString item.qty) ++ " " ++ item.name) ]
+          , span [class "spread__r"] [ text ("$" ++ (toString (item.price * item.qty))) ]
           ]
         ]
 
     clearCartButton =
       if (List.length cart.items) > 0 then
         div []
-          [ button [ class "btn btn--full u-mb-", onClick ClearCart ] [ text "Clear Cart" ]
-          , a [ href "/#/checkout", class "btn btn--full" ] [ text "checkout" ]
+          [ button [ class "btn btn--full btn--negative u-mb-", onClick ClearCart ] [ text "Clear Cart" ]
+          , a [ href "/#/checkout/select-payment", class "btn btn--full" ] [ text "checkout" ]
           ]
       else
         text ""
