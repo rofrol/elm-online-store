@@ -5,6 +5,10 @@ module Components.SelectPayment.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
+-- OUR MODULES
+
+import Components.CreateCardForm.View as CreateCardFormView
+
 -- VIEW
 
 view : Html a
@@ -12,17 +16,7 @@ view =
   div []
     [ div [ class "layout" ]
       [ div [ class "layout__item u-1/2" ]
-        [ createCardForm ]
+        [ CreateCardFormView.view
+        ]
       ]
-    ]
-
-createCardForm : Html a
-createCardForm =
-  div []
-    [ span [] [ text "New Card" ]
-    , hr [ class "u-mb" ] []
-    , input [ class "input u-1/1 u-mb-" ] []
-    , input [ class "input u-1/1 u-mb-" ] []
-    , input [ class "input u-1/1 u-mb-" ] []
-    , input [ class "input u-1/1 u-mb-" ] []
     ]
