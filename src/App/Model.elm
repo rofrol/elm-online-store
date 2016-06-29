@@ -24,12 +24,9 @@ init (route, location) =
 
 initialModel : (Route, Hop.Types.Location) -> Model
 initialModel (route, location) =
-  let
-    initialCart =
-      Cart [] 0 False False False
-  in
     { title = "Elm Example"
-    , menu = Menu [] initialCart 0 False False False
+    , menu = Menu [] 0 False False False
+    , cart = Cart [] 0 False False False
     , location = location
     , route = route
     }

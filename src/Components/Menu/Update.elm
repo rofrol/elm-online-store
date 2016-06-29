@@ -2,6 +2,7 @@ module Components.Menu.Update exposing (..)
 
 -- OUR MODULES
 
+import Components.Menu.Model exposing (Model)
 import Components.Menu.Types exposing (Menu, MenuItem, MenuItemResponse, Msg(..))
 import Components.Menu.Api exposing (getMenu)
 import Components.Cart.Update as Cart
@@ -9,7 +10,7 @@ import Components.Counter.Update as Counter
 
 -- UPDATE
 
-update : Msg -> Menu -> (Menu , Cmd Msg)
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     UpdateItemQty id msg ->
@@ -19,27 +20,30 @@ update msg model =
             { item | qty = Counter.update msg item.qty }
           else
             item
+
+        updateMenu menu =
+          { menu | items = List.map updateItem model.menu.items }
       in
-        { model | items = List.map updateItem model.items }
+        { model | menu = updateMenu model.menu }
         ! []
 
     GetMenu ->
-      (Menu [] model.cart 0 True False False)
+      { model | menu = Menu [] 0 True False False }
       ! [ getMenu ]
 
     UpdateMenuSuccess response ->
-      (Menu 
-        (List.map mapMenuItem response.items)
-        model.cart
-        response.storeId
-        False
-        True
-        False
-      )
+      { model | menu =
+        Menu
+          (List.map mapMenuItem response.items)
+          response.storeId
+          False
+          True
+          False
+      }
       ! []
 
     UpdateMenuFail error ->
-      (Menu [] model.cart 0 False False True)
+      { model | menu = (Menu [] 0 False False True) }
       ! []
 
     CartMsg msg ->

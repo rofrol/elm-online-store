@@ -9,6 +9,7 @@ import Html.App as App
 -- OUR MODULES
 
 import Components.Menu.Types exposing (Menu, Msg(..))
+import Components.Menu.Model exposing (Model)
 import Components.Cart.Types as CartTypes
 import Components.Cart.View as CartView
 import Components.Counter.View as CounterView
@@ -17,9 +18,13 @@ import Components.AsyncButton.View as AsyncButtonView
 
 -- VIEW
 
-view : Menu -> Html Msg
-view menu =
+view : Model -> Html Msg
+view model =
   let
+    menu = model.menu
+
+    cart = model.cart
+
     menuItem item =
       div [ class "layout__item u-1/2 u-pb++ u-pr++" ]
         [ h1 [] [ text item.name ]
@@ -30,7 +35,7 @@ view menu =
             (CounterView.view item.qty (Just 0) Nothing)
           ]
         , AsyncButtonView.view
-            menu.cart.isLoading
+            cart.isLoading
             (CartMsg <| CartTypes.AddItemToCart <| buildItemPayload <| item)
             "Add Item"
         ]
@@ -48,7 +53,7 @@ view menu =
           , LoadingSpinnerView.view menu.isLoading Nothing
           ]
         , div [ class "layout__item u-1/5 u-p"]
-          [ App.map CartMsg (CartView.view menu.cart)
+          [ App.map CartMsg (CartView.view cart)
           ]
         ]
       ]

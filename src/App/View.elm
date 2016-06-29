@@ -50,7 +50,7 @@ pageView model route =
       div [ ] [ text "Route Not Found" ]
 
     MenuRoute ->
-      App.map MenuMsg (Menu.view model.menu)
+      App.map MenuMsg (Menu.view { menu = model.menu, cart = model.cart })
 
     CheckoutRoute route ->
-      App.map CheckoutMsg (Checkout.view route model.menu.cart)
+      App.map CheckoutMsg (Checkout.view route model.cart)

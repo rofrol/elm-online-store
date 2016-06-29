@@ -6,7 +6,8 @@ import Hop.Types exposing (Location, Query)
 
 -- OUR MODULES
 
-import Components.Menu.Types exposing (Menu, Msg)
+import Components.Menu.Types exposing (Menu)
+import Components.Cart.Types exposing (Cart)
 import Components.Checkout.Types exposing (Msg)
 
 -- TYPES
@@ -14,6 +15,7 @@ import Components.Checkout.Types exposing (Msg)
 type alias Model =
   { title : String
   , menu : Menu
+  , cart : Cart
   , location : Location
   , route : Route
   }

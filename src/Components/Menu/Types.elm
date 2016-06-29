@@ -20,7 +20,6 @@ type Msg
 
 type alias Menu =
   { items : List MenuItem
-  , cart : CartTypes.Cart
   , storeId : Int
   , isLoading : Bool
   , isLoaded : Bool

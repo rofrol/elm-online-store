@@ -51,12 +51,11 @@ update msg model =
 
     MenuMsg msg ->
       let
-        result = MenuUpdate.update msg model.menu
-        newMenu = fst result
-        cmdMsg = snd result
+        (menuModel, cmd) =
+          MenuUpdate.update msg { menu = model.menu, cart = model.cart }
       in
-        { model | menu = newMenu }
-        ! [ Cmd.map MenuMsg cmdMsg ]
+        { model | menu = menuModel.menu, cart = menuModel.cart }
+        ! [ Cmd.map MenuMsg cmd ]
 
     -- Checkout
 
