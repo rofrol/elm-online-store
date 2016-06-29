@@ -25,7 +25,9 @@ view menu =
         [ h1 [] [ text item.name ]
         , h3 [] [ text ("$" ++ (toString item.price) ) ]
         , div [ class "u-pv" ]
-          [ App.map (UpdateItemQty item.id) (CounterView.view item.qty)
+          [ App.map
+            (UpdateItemQty item.id)
+            (CounterView.view item.qty (Just 0) Nothing)
           ]
         , AsyncButtonView.view
             menu.cart.isLoading
