@@ -20,9 +20,9 @@ view cart =
       if cart.isLoaded then
         div []
           [ div [ class "spread u-pb" ]
-            [ span [ class "spread_l" ]
+            [ span [ class "spread__l" ]
               [ text "Total:" ]
-            , span [ class "spread_r" ]
+            , span [ class "spread__r" ]
               [ text ("$" ++ (toString cart.total)) ]
             ]
           , div [ class "layout" ] (List.map cartItemView cart.items)
