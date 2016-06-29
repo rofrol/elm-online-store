@@ -13,4 +13,7 @@ update msg model =
       (model + 1)
 
     Decrement ->
-      (model - 1)
+      if (model - 1) < 0 then
+        model
+      else
+        (model - 1)
