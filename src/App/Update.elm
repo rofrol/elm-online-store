@@ -14,53 +14,63 @@ import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Menu.Types as MenuTypes
 import Components.Menu.Update as MenuUpdate
 import Components.Cart.Types as CartTypes
+import Components.Checkout.Update as CheckoutUpdate
 import Ports.Debug exposing (debug)
 
 -- UPDATE
 
 update : Msg -> Model -> (Model , Cmd Msg)
 update msg model =
-  case msg of
-    NoOp ->
-      model ! []
+  let
+    msg = Debug.log "MSG" msg
+    model = Debug.log "MODEL" model
+  in
+    case msg of
+      NoOp ->
+        model ! []
 
-    ToggleDebugger ->
-      model ! [ debug True ]
+      ToggleDebugger ->
+        model ! [ debug True ]
 
-    -- NAV
+      -- NAV
 
-    NavigateTo path ->
-      let
-        command =
-          makeUrl routerConfig path
-              |> Navigation.newUrl
-      in
-        ( model, command )
+      NavigateTo path ->
+        let
+          command =
+            makeUrl routerConfig path
+                |> Navigation.newUrl
+        in
+          ( model, command )
 
-    SetQuery query ->
-      let
-        command =
-          model.location
-              |> setQuery query
-              |> makeUrlFromLocation routerConfig
-              |> Navigation.newUrl
-      in
-        ( model, command )
+      SetQuery query ->
+        let
+          command =
+            model.location
+                |> setQuery query
+                |> makeUrlFromLocation routerConfig
+                |> Navigation.newUrl
+        in
+          ( model, command )
 
-    -- MENU
+      -- MENU
 
-    MenuMsg msg ->
-      let
-        (menuModel, cmd) =
-          MenuUpdate.update msg { menu = model.menu, cart = model.cart }
-      in
-        { model | menu = menuModel.menu, cart = menuModel.cart }
-        ! [ Cmd.map MenuMsg cmd ]
+      MenuMsg msg ->
+        let
+          (menuModel, cmd) =
+            MenuUpdate.update msg { menu = model.menu, cart = model.cart }
+        in
+          { model | menu = menuModel.menu, cart = menuModel.cart }
+          ! [ Cmd.map MenuMsg cmd ]
 
-    -- Checkout
+      -- Checkout
 
-    CheckoutMsg msg ->
-      model ! []
+      CheckoutMsg msg ->
+        let
+          (checkoutModel, cmd) =
+            CheckoutUpdate.update msg { cart = model.cart, newCard = model.newCard }
+        in
+          { model | cart = checkoutModel.cart, newCard = checkoutModel.newCard }
+          ! []
 
 
 -- URL UPDATE
