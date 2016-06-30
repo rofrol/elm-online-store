@@ -4,11 +4,17 @@ module Components.CreateCardForm.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick, onInput)
+
+-- OUR MODULES
+
+import GeneralTypes.NewCard exposing (NewCard)
+import Components.CreateCardForm.Types exposing (Msg(..))
 
 -- VIEW
 
-view : Html a
-view =
+view : NewCard -> Html Msg
+view card =
   div []
     [ div [] [ text "New Card" ]
     , hr [ class "u-mb" ] []
@@ -19,15 +25,16 @@ view =
           , div [] [ text "Name on Card" ]
           ]
         , div [ class "field-set__fields" ]
-          [ input [] []
-          , input [] []
+          [ input [ value card.cardNumber, maxlength 19, onInput CardNumber ] []
+          , input [ onInput Name ] []
           ]
         ]
       , div [ class "field-row" ]
         [ div [] [ text "Expiration Date" ]
-        , input [] []
+        , input [ value card.exp, maxlength 5, onInput ExpirationDate ] []
         , div [] [ text "CVV" ]
-        , input [] []
+        , input [ value card.cvv, maxlength 4, onInput CVV ] []
         ]
+      , button [ class "btn", onClick Submit ] [ text "CREATE" ]
       ]
     ]
