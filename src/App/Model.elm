@@ -10,6 +10,7 @@ import App.Types exposing (Route, Model, Msg)
 import App.Update exposing (urlUpdate)
 import Components.Menu.Types exposing (Menu)
 import Components.Cart.Types exposing (Cart)
+import GeneralTypes.NewCard exposing (NewCard)
 
 -- INIT
 
@@ -27,6 +28,7 @@ initialModel (route, location) =
     { title = "Elm Example"
     , menu = Menu [] 0 False False False
     , cart = Cart [] 0 False False False
+    , newCard = NewCard "1234" "" "" ""
     , location = location
     , route = route
     }
