@@ -4,19 +4,22 @@ module Components.SelectPayment.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.App as App
 
 -- OUR MODULES
 
+import Components.SelectPayment.Model exposing (Model)
+import Components.SelectPayment.Types exposing (Msg(..))
 import Components.CreateCardForm.View as CreateCardFormView
 
 -- VIEW
 
-view : Html a
-view =
+view : Model -> Html Msg
+view model =
   div []
     [ div [ class "layout" ]
       [ div [ class "layout__item u-1/2" ]
-        [ CreateCardFormView.view
+        [ App.map CreateCardFormMsg (CreateCardFormView.view model.newCard)
         ]
       ]
     ]
