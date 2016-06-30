@@ -53,4 +53,7 @@ pageView model route =
       App.map MenuMsg (Menu.view { menu = model.menu, cart = model.cart })
 
     CheckoutRoute route ->
-      App.map CheckoutMsg (Checkout.view route model.cart)
+      App.map CheckoutMsg
+        (Checkout.view route
+          { cart = model.cart, newCard = model.newCard }
+        )
