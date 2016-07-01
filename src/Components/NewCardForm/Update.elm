@@ -1,8 +1,8 @@
-module Components.CreateCardForm.Update exposing (update)
+module Components.NewCardForm.Update exposing (update)
 
 -- OUR MODULES
 
-import Components.CreateCardForm.Types exposing (..)
+import Components.NewCardForm.Types exposing (..)
 import GeneralTypes.NewCard exposing (NewCard)
 import Utils.Format exposing (formatCardNumber, formatCardExpiration, formatCVV)
 
@@ -11,9 +11,6 @@ import Utils.Format exposing (formatCardNumber, formatCardExpiration, formatCVV)
 update : Msg -> NewCard -> (NewCard, Cmd Msg)
 update msg model =
   case msg of
-    Submit ->
-      model ! []
-
     CardNumber newNum ->
       { model | cardNumber = formatCardNumber newNum}
       ! []

@@ -1,4 +1,4 @@
-module Components.CreateCardForm.View exposing (..)
+module Components.NewCardForm.View exposing (..)
 
 -- CORE MODULES
 
@@ -9,7 +9,7 @@ import Html.Events exposing (onClick, onInput)
 -- OUR MODULES
 
 import GeneralTypes.NewCard exposing (NewCard)
-import Components.CreateCardForm.Types exposing (Msg(..))
+import Components.NewCardForm.Types exposing (Msg(..))
 
 -- VIEW
 
@@ -35,6 +35,5 @@ view card =
         , div [] [ text "CVV" ]
         , input [ value card.cvv, maxlength 4, onInput CVV ] []
         ]
-      , button [ class "btn", onClick Submit ] [ text "CREATE" ]
       ]
     ]
