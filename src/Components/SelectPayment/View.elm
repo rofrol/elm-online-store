@@ -17,10 +17,24 @@ import Components.NewCardForm.View as NewCardFormView
 view : Model -> Html Msg
 view model =
   div []
-    [ div [ class "layout" ]
+    [ div [ class "layout layout--huge" ]
       [ div [ class "layout__item u-1/2" ]
-        [ App.map CreateCardFormMsg (CreateCardFormView.view model.newCard)
         [ App.map NewCardFormMsg (NewCardFormView.view model.newCard)
+        , div [ class "spread u-mt" ]
+          [ label [ class "label" ]
+            [ span [ class "u-pr-" ] [ text "Save Card" ]
+            , input [ type' "checkbox", value "text" ] []
+            ]
+          , button [ class "btn" ] [ text "Order Now" ]
+          ]
+        ]
+      , div [ class "layout__item u-1/2" ]
+        [ div [] [ text "Saved Card" ]
+        , hr [ class "u-mb" ] []
+        , div [ class "spread" ]
+          [ div [] [ text "Card ending in 2456" ]
+          , button [ class "btn" ] [ text "Order Now" ]
+          ]
         ]
       ]
     ]
