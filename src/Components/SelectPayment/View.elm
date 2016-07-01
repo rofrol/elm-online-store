@@ -10,7 +10,7 @@ import Html.App as App
 
 import Components.SelectPayment.Model exposing (Model)
 import Components.SelectPayment.Types exposing (Msg(..))
-import Components.CreateCardForm.View as CreateCardFormView
+import Components.NewCardForm.View as NewCardFormView
 
 -- VIEW
 
@@ -20,6 +20,7 @@ view model =
     [ div [ class "layout" ]
       [ div [ class "layout__item u-1/2" ]
         [ App.map CreateCardFormMsg (CreateCardFormView.view model.newCard)
+        [ App.map NewCardFormMsg (NewCardFormView.view model.newCard)
         ]
       ]
     ]

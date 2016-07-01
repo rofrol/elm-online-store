@@ -4,16 +4,16 @@ module Components.SelectPayment.Update exposing (..)
 
 import Components.SelectPayment.Types exposing (..)
 import Components.SelectPayment.Model exposing (Model)
-import Components.CreateCardForm.Update as CreateCardFormUpdate
+import Components.NewCardForm.Update as NewCardFormUpdate
 
 -- UPDATE
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    CreateCardFormMsg msg ->
+    NewCardFormMsg msg ->
       let
         (model', cmds) =
-          CreateCardFormUpdate.update msg model.newCard
+          NewCardFormUpdate.update msg model.newCard
       in
         { model | newCard = model' } ! []

@@ -2,9 +2,9 @@ module Components.SelectPayment.Types exposing (..)
 
 -- OUR MODULES
 
-import Components.CreateCardForm.Types as CreateCardFormTypes
+import Components.NewCardForm.Types as NewCardFormTypes
 
 -- TYPES
 
 type Msg
-  = CreateCardFormMsg CreateCardFormTypes.Msg
+  = NewCardFormMsg NewCardFormTypes.Msg
