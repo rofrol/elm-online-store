@@ -1,6 +1,6 @@
 -- CORE MODULES
 
-import TimeTravel.Navigation
+import Navigation
 
 -- OUR MODULES
 
@@ -14,7 +14,7 @@ import App.Subscriptions exposing (subscriptions)
 
 main : Program Never
 main =
-  TimeTravel.Navigation.program urlParser
+  Navigation.program urlParser
     { init = init
     , view = view
     , update = update
