@@ -92,4 +92,4 @@ urlUpdate ( route, location ) model =
         -> update (MenuMsg MenuTypes.GetMenu) newModel
         :> update (MenuMsg (MenuTypes.CartMsg CartTypes.GetCart))
       CheckoutRoute route
-        -> newModel ! []
+        -> update (MenuMsg (MenuTypes.CartMsg CartTypes.GetCart)) newModel
