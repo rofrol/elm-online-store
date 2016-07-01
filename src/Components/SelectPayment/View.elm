@@ -19,7 +19,9 @@ view model =
   div []
     [ div [ class "layout layout--huge" ]
       [ div [ class "layout__item u-1/2" ]
-        [ App.map NewCardFormMsg (NewCardFormView.view model.newCard)
+        [ h4 [ class "u-m0" ] [ text "New Card" ]
+        , hr [ class "u-mb" ] []
+        , App.map NewCardFormMsg (NewCardFormView.view model.newCard)
         , div [ class "spread u-mt" ]
           [ label [ class "label" ]
             [ span [ class "u-pr-" ] [ text "Save Card" ]
@@ -29,7 +31,7 @@ view model =
           ]
         ]
       , div [ class "layout__item u-1/2" ]
-        [ div [] [ text "Saved Card" ]
+        [ h4 [ class "u-m0" ] [ text "Saved Card" ]
         , hr [ class "u-mb" ] []
         , div [ class "spread" ]
           [ div [] [ text "Card ending in 2456" ]

@@ -16,9 +16,7 @@ import Components.NewCardForm.Types exposing (Msg(..))
 view : NewCard -> Html Msg
 view card =
   div []
-    [ div [] [ text "New Card" ]
-    , hr [ class "u-mb" ] []
-    , div [ class "form" ]
+    [ div [ class "form" ]
       [ div [ class "field-set" ]
         [ div [ class "field-set__labels" ]
           [ div [] [ text "Card Number" ]
