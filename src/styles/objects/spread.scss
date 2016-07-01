@@ -1,13 +1,5 @@
-.spread:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.spread__r {
-  float: right;
-}
-
-.spread__l {
-  float : left;
+.spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
