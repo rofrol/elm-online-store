@@ -28,11 +28,11 @@ view route model =
           CheckoutSummaryView.view
   in
     div []
-      [ div [ class "layout u-pb" ]
-        [ div [ class "layout__item u-1/2"]
+      [ div [ class "layout u-pb+" ]
+        [ div [ class "layout__item u-4/5"]
           [ text "Ordering from: "
           ]
-        , div [ class "layout__item u-1/2"]
+        , div [ class "layout__item u-1/5"]
           [ div [ class "spread" ]
             [ span [ class "spread__l" ] [ text "Total: " ]
             , span [ class "spread__r" ] [ text ("$" ++ (toString model.cart.total)) ]
