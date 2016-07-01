@@ -28,7 +28,7 @@ initialModel (route, location) =
     { title = "Elm Example"
     , menu = Menu [] 0 False False False
     , cart = Cart [] 0 False False False
-    , newCard = NewCard "1234" "" "" ""
+    , newCard = NewCard "" "" "" ""
     , location = location
     , route = route
     }
