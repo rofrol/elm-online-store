@@ -23,6 +23,7 @@ view model =
       [ ("position", "absolute")
       , ("top", "0")
       , ("left", "0")
+      , ("display", "none")
       ]
   in
     div []
