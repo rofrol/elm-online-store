@@ -6,7 +6,7 @@ import Navigation
 import App.Nav exposing (routerConfig)
 import Hop exposing (makeUrl, setQuery, makeUrlFromLocation)
 import Hop.Types exposing (Location)
-import Update.Extra.Infix exposing ((:>))
+import Update.Extra exposing (andThen)
 
 -- OUR MODULES
 
@@ -14,6 +14,7 @@ import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Menu.Types as MenuTypes
 import Components.Menu.Update as MenuUpdate
 import Components.Cart.Types as CartTypes
+import Components.Cart.Update as CartUpdate
 import Components.Checkout.Update as CheckoutUpdate
 import Ports.Debug exposing (debug)
 
@@ -21,10 +22,10 @@ import Ports.Debug exposing (debug)
 
 update : Msg -> Model -> (Model , Cmd Msg)
 update msg model =
-  let
-    msg = Debug.log "MSG" msg
-    model = Debug.log "MODEL" model
-  in
+  -- let
+  --   msg = Debug.log "MSG" msg
+  --   model = Debug.log "MODEL" model
+  -- in
     case msg of
       NoOp ->
         model ! []
@@ -62,6 +63,16 @@ update msg model =
           { model | menu = menuModel.menu, cart = menuModel.cart }
           ! [ Cmd.map MenuMsg cmd ]
 
+      -- CART
+
+      CartMsg msg ->
+        let
+          (newCart, cmd) =
+            CartUpdate.update msg model.cart
+        in
+          { model | cart = newCart }
+          ! [ Cmd.map CartMsg cmd ]
+
       -- Checkout
 
       CheckoutMsg msg ->
@@ -88,8 +99,27 @@ urlUpdate ( route, location ) model =
         -> newModel ! []
       AboutRoute
         -> newModel ! []
-      MenuRoute
-        -> update (MenuMsg MenuTypes.GetMenu) newModel
-        :> update (MenuMsg (MenuTypes.CartMsg CartTypes.GetCart))
-      CheckoutRoute route
-        -> update (MenuMsg (MenuTypes.CartMsg CartTypes.GetCart)) newModel
+
+      MenuRoute ->
+        newModel ! []
+          |> getMenu
+          |> getCart
+
+      CheckoutRoute route ->
+        newModel ! []
+          |> getCart
+
+
+getMenu : (Model, Cmd Msg) -> (Model, Cmd Msg)
+getMenu (model, cmd) =
+  if not model.menu.isLoaded then
+    andThen update (MenuMsg MenuTypes.GetMenu) (model, cmd)
+  else
+    (model, cmd)
+
+getCart : (Model, Cmd Msg) -> (Model, Cmd Msg)
+getCart (model, cmd) =
+  if not model.cart.isLoaded then
+    andThen update (CartMsg CartTypes.GetCart) (model, cmd)
+  else
+    (model, cmd)
