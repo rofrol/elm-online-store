@@ -4,12 +4,12 @@ module Components.NewCardForm.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (onClick, onInput, onBlur)
 
 -- OUR MODULES
 
 import GeneralTypes.NewCard exposing (NewCard)
-import Components.NewCardForm.Types exposing (Msg(..))
+import Components.NewCardForm.Types exposing (Msg(..), FormError(..))
 
 -- VIEW
 
@@ -23,15 +23,17 @@ view card =
           , div [] [ text "Name on Card" ]
           ]
         , div [ class "field-set__fields" ]
-          [ input [ value card.cardNumber, maxlength 19, onInput CardNumber ] []
-          , input [ onInput Name ] []
+          [ input
+            [ value card.cardNumber, maxlength 19, onInput UpdateCardNumber, onBlur (MaybeSetErrorMessage CardNumberError)
+            ] []
+          , input [ onInput UpdateName, onBlur (MaybeSetErrorMessage CardNameError) ] []
           ]
         ]
       , div [ class "field-row" ]
         [ div [] [ text "Expiration Date" ]
-        , input [ value card.exp, maxlength 5, onInput ExpirationDate ] []
+        , input [ value card.exp, maxlength 5, onInput UpdateExpirationDate, onBlur (MaybeSetErrorMessage CardExpError) ] []
         , div [] [ text "CVV" ]
-        , input [ value card.cvv, maxlength 4, onInput CVV ] []
+        , input [ value card.cvv, maxlength 4, onInput UpdateCVV, onBlur (MaybeSetErrorMessage CardCVVError) ] []
         ]
       ]
     ]
