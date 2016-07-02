@@ -1,4 +1,4 @@
-module Utils.Format exposing (..)
+module UtilsAndConstants.Format exposing (..)
 
 -- CORE MODULES
 
