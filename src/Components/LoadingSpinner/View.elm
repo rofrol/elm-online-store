@@ -13,7 +13,7 @@ import Components.LoadingSpinner.Types exposing (..)
 
 view : Bool -> Maybe Type -> Html a
 -- Bool ::: if True shows spinner
--- Maybe Type ::: affects the style of the spinner
+-- Maybe Type ::: affects the style of the spinner - "Nothing" gives default spinner
 
 view isLoading type' =
   let
