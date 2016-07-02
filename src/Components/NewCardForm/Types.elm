@@ -1,7 +1,16 @@
 module Components.NewCardForm.Types exposing (..)
 
 type Msg
-  = CardNumber String
-  | Name String
-  | ExpirationDate String
-  | CVV String
+  = UpdateCardNumber String
+  | UpdateName String
+  | UpdateExpirationDate String
+  | UpdateCVV String
+  | MaybeSetErrorMessage FormError
+  | MaybeClearErrorMessage FormError
+  | UpdateHasError
+
+type FormError
+  = CardNumberError
+  | CardNameError
+  | CardExpError
+  | CardCVVError
