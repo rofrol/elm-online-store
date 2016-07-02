@@ -4,7 +4,6 @@ module App.View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 import Html.App as App
 
 -- OUR MODULES
@@ -18,25 +17,14 @@ import Components.Checkout.View as Checkout
 
 view : Model -> Html Msg
 view model =
-  let
-    debugButtonStyles =
-      [ ("position", "absolute")
-      , ("top", "0")
-      , ("left", "0")
-      , ("display", "none")
-      ]
-  in
-    div []
-      [ div [ style debugButtonStyles ]
-        [ button [ class "btn", onClick ToggleDebugger ] [ text "DEBUG" ]
+  div []
+    [ div [ class "u-m++" ]
+      [ div [ class "u-mt u-mb+" ]
+        [ h1 [ class "u-txt-c" ] [text "Elm Online Store Example"]
         ]
-      , div [ class "u-m++" ]
-        [ div [ class "u-mt u-mb+" ]
-          [ h1 [ class "u-txt-c" ] [text "Elm Online Store Example"]
-          ]
-        , pageView model model.route
-        ]
+      , pageView model model.route
       ]
+    ]
 
 pageView : Model -> Route -> Html Msg
 pageView model route =
