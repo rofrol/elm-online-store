@@ -6,8 +6,8 @@ import Hop.Types exposing (Location, Query)
 
 -- OUR MODULES
 
-import Components.Menu.Types exposing (Menu)
-import Components.Cart.Types exposing (Cart)
+import Components.Menu.Types as MenuTypes
+import Components.Cart.Types as CartTypes
 import Components.Checkout.Types exposing (Msg)
 import GeneralTypes.NewCard exposing (NewCard)
 
@@ -15,8 +15,8 @@ import GeneralTypes.NewCard exposing (NewCard)
 
 type alias Model =
   { title : String
-  , menu : Menu
-  , cart : Cart
+  , menu : MenuTypes.Menu
+  , cart : CartTypes.Cart
   , newCard : NewCard
   , location : Location
   , route : Route
@@ -38,5 +38,6 @@ type Msg
   | ToggleDebugger
   | NavigateTo String
   | SetQuery Query
-  | MenuMsg Components.Menu.Types.Msg
+  | MenuMsg MenuTypes.Msg
   | CheckoutMsg Components.Checkout.Types.Msg
+  | CartMsg CartTypes.Msg
