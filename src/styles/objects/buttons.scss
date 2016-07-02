@@ -4,3 +4,7 @@ $inuit-enable-btn--full:    true;
 $inuit-enable-btn--pill:    true;
 
 @import "./node_modules/inuit-buttons/objects.buttons";
+
+.btn--disabled {
+    background-color: grey;
+}
