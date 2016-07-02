@@ -14,6 +14,7 @@ import App.Types exposing (CheckoutSubRoute(..))
 import Components.Checkout.Types exposing (Msg)
 import Components.SelectPayment.View as SelectPaymentView
 import Components.CheckoutSummary.View as CheckoutSummaryView
+import Components.LoadingSpinner.View as LoadingSpinnerView
 
 -- VIEW
 
@@ -26,18 +27,25 @@ view route model =
           App.map SelectPaymentMsg (SelectPaymentView.view { newCard = model.newCard })
         CheckoutSummary ->
           CheckoutSummaryView.view
-  in
-    div []
-      [ div [ class "layout u-pb+" ]
-        [ div [ class "layout__item u-4/5"]
-          [ text "Ordering from: "
-          ]
-        , div [ class "layout__item u-1/5"]
-          [ div [ class "spread" ]
-            [ span [ class "spread__l" ] [ text "Total: " ]
-            , span [ class "spread__r" ] [ text ("$" ++ (toString model.cart.total)) ]
+
+    topView =
+      if model.cart.isLoaded then
+        div [ class "layout u-pb+" ]
+          [ div [ class "layout__item u-4/5"]
+            [ text "Ordering from: "
+            ]
+          , div [ class "layout__item u-1/5"]
+            [ div [ class "spread" ]
+              [ span [ class "spread__l" ] [ text "Total: " ]
+              , span [ class "spread__r" ] [ text ("$" ++ (toString model.cart.total)) ]
+              ]
             ]
           ]
-        ]
+      else text ""
+
+  in
+    div []
+      [ LoadingSpinnerView.view model.cart.isLoading Nothing
+      , topView
       , subView
       ]
