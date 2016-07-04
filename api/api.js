@@ -59,6 +59,15 @@ app.post('/card', function (req, res) {
     res.status(200).send(card);
   }, 800)
 });
+
+app.get('/card', function (req, res) {
+  console.log('GET /card');
+  res.set('Content-Type', 'application/json');
+  setTimeout(function() {
+    res.status(200).send(card);
+  }, 800)
+})
+
 app.put('/cart/item', function (req, res) {
   console.log('PUT /cart/item');
 
