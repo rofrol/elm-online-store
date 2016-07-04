@@ -12,20 +12,18 @@ import Update.Extra exposing (andThen)
 
 import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Menu.Types as MenuTypes
-import Components.Menu.Update as MenuUpdate
 import Components.Cart.Types as CartTypes
+import Components.Card.Types as CardTypes
+import Components.Menu.Update as MenuUpdate
 import Components.Cart.Update as CartUpdate
 import Components.Checkout.Update as CheckoutUpdate
+import Components.Card.Update as CardUpdate
 import Ports.Debug exposing (debug)
 
 -- UPDATE
 
 update : Msg -> Model -> (Model , Cmd Msg)
 update msg model =
-  -- let
-  --   msg = Debug.log "MSG" msg
-  --   model = Debug.log "MODEL" model
-  -- in
     case msg of
       NoOp ->
         model ! []
@@ -73,15 +71,25 @@ update msg model =
           { model | cart = newCart }
           ! [ Cmd.map CartMsg cmd ]
 
-      -- Checkout
+      -- CHECKOUT
 
       CheckoutMsg msg ->
         let
-          (checkoutModel, cmd) =
+          (checkoutModel, cmds) =
             CheckoutUpdate.update msg { cart = model.cart, newCard = model.newCard, savedCard = model.savedCard }
         in
-          { model | cart = checkoutModel.cart, newCard = checkoutModel.newCard }
-          ! []
+          { model | cart = checkoutModel.cart, newCard = checkoutModel.newCard, savedCard = checkoutModel.savedCard }
+          ! [ Cmd.map CheckoutMsg cmds ]
+
+      -- CardMsg
+
+      CardMsg msg ->
+        let
+          (model', cmds) =
+            CardUpdate.update msg ( model.savedCard, model.newCard )
+        in
+          { model | savedCard = fst model', newCard = snd model' }
+          ! [ Cmd.map CardMsg cmds ]
 
 
 -- URL UPDATE
@@ -108,7 +116,7 @@ urlUpdate ( route, location ) model =
       CheckoutRoute route ->
         newModel ! []
           |> getCart
-
+          |> getSavedCard
 
 getMenu : (Model, Cmd Msg) -> (Model, Cmd Msg)
 getMenu (model, cmd) =
@@ -121,5 +129,12 @@ getCart : (Model, Cmd Msg) -> (Model, Cmd Msg)
 getCart (model, cmd) =
   if not model.cart.isLoaded then
     andThen update (CartMsg CartTypes.GetCart) (model, cmd)
+  else
+    (model, cmd)
+
+getSavedCard : (Model, Cmd Msg) -> (Model, Cmd Msg)
+getSavedCard (model, cmd) =
+  if not model.savedCard.isLoaded then
+    andThen update (CardMsg CardTypes.GetSavedCard) (model, cmd)
   else
     (model, cmd)
