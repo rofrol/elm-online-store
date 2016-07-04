@@ -10,7 +10,7 @@ import Components.Card.Types exposing (..)
 import UtilsAndConstants.Format exposing (formatCardNumber, formatCardExpiration, formatCVV)
 import UtilsAndConstants.FormValidators exposing (validateCardNumber, validateName, validateCardExp, validateCardCVV)
 import UtilsAndConstants.Errors exposing (cardNumberErrorMsg, nameErrorMsg, cardExpErrorMsg, cardCVVErrorMsg)
-import Components.Card.Api exposing (saveCard)
+import Components.Card.Api exposing (saveCard, getSavedCard)
 import Components.Card.Model exposing (Model)
 
 -- UPDATE
@@ -22,14 +22,29 @@ update msg model =
     newCard = snd model
   in
     case msg of
+      SaveCard ->
+        ( savedCardLoading, newCard ) ! [ saveCard newCard ]
+
+      GetSavedCard ->
+        ( savedCardLoading, newCard ) ! [ getSavedCard ]
+
       UpdateSavedCardSuccess response ->
-        model ! []
+        ( { savedCard
+          | number = response.number
+          , name = response.name
+          , exp = response.exp
+          , cvv = response.cvv
+          , isLoading = False
+          , isLoaded = True
+          }
+        , newCard
+        ) ! []
 
       UpdateSavedCardFail error ->
         model ! []
 
       UpdateNewCardNumber newNum ->
-          ( savedCard , { newCard | cardNumber = formatCardNumber newNum } ) ! []
+          ( savedCard , { newCard | number = formatCardNumber newNum } ) ! []
             |> andThen update UpdateNewCardHasError
             |> andThen update (MaybeClearErrorMessage CardNumberError)
 
@@ -49,7 +64,7 @@ update msg model =
             |> andThen update (MaybeClearErrorMessage CardCVVError)
 
       UpdateNewCardHasError ->
-        if validateCardNumber newCard.cardNumber
+        if validateCardNumber newCard.number
         && validateName newCard.name
         && validateCardExp newCard.exp
         && validateCardCVV newCard.cvv
@@ -73,7 +88,7 @@ update msg model =
         in
           case errorType of
             CardNumberError ->
-                removeError validateCardNumber newCard.cardNumber cardNumberErrorMsg
+                removeError validateCardNumber newCard.number cardNumberErrorMsg
             CardNameError ->
                 removeError validateName newCard.name nameErrorMsg
             CardExpError ->
@@ -81,16 +96,13 @@ update msg model =
             CardCVVError ->
                 removeError validateCardCVV newCard.cvv cardCVVErrorMsg
 
-      SaveCard ->
-        model ! [ saveCard newCard ]
-
       MaybeSetErrorMessage errorType ->
         let
           (errorString, isValid) =
             case errorType of
               CardNumberError ->
                 ( cardNumberErrorMsg
-                , validateCardNumber newCard.cardNumber
+                , validateCardNumber newCard.number
                 )
               CardNameError ->
                 ( nameErrorMsg
@@ -116,3 +128,7 @@ update msg model =
             ! []
           else
             model ! []
+
+savedCardLoading : SavedCard
+savedCardLoading =
+  SavedCard "" "" "" "" True False False ""
