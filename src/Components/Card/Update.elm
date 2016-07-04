@@ -73,6 +73,14 @@ update msg model =
         else
           ( savedCard , { newCard | hasError = True } ) ! []
 
+      UpdateNewCardShouldSave ->
+        ( savedCard , { newCard | shouldSave = not newCard.shouldSave } ) ! []
+
+      UseSavedCard ->
+        ( { savedCard | shouldUse = True }
+        , { newCard | shouldUse = False }
+        ) ! []
+
       MaybeClearErrorMessage errorType ->
         let
           filterOutError error =
@@ -131,4 +139,4 @@ update msg model =
 
 savedCardLoading : SavedCard
 savedCardLoading =
-  SavedCard "" "" "" "" True False False ""
+  SavedCard "" "" "" "" False True False False ""
