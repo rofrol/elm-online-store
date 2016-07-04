@@ -22,7 +22,7 @@ app.get('/menu', function (req, res) {
   res.set('Content-Type', 'application/json');
   setTimeout(function() {
     res.status(200).send(menu);
-  }, 1500)
+  }, 800)
 });
 
 app.get('/cart', function (req, res) {
@@ -30,7 +30,7 @@ app.get('/cart', function (req, res) {
   res.set('Content-Type', 'application/json');
   setTimeout(function() {
     res.status(200).send(cart);
-  }, 1500)
+  }, 800)
 });
 
 app.get('/cart/clear', function (req, res) {
@@ -42,7 +42,7 @@ app.get('/cart/clear', function (req, res) {
   res.set('Content-Type', 'application/json');
   setTimeout(function() {
     res.status(200).send(cart);
-  }, 1500)
+  }, 800)
 });
 
 app.put('/cart/item', function (req, res) {
@@ -71,14 +71,17 @@ app.put('/cart/item', function (req, res) {
       cart.items.push(newItem);
   }
 
-  cart.total = _.reduce(cart.items, function(sum, item) {
+  cart.subTotal = _.reduce(cart.items, function(sum, item) {
     return sum + (item.price * item.qty);
   }, 0)
+
+  cart.tax = cart.subTotal * .042;
+  cart.total = cart.subTotal + cart.tax;
 
   res.set('Content-Type', 'application/json');
   setTimeout(function() {
     res.status(200).send(cart);
-  }, 1500)
+  }, 800)
 });
 
 app.listen(PORT, function () {
@@ -87,7 +90,9 @@ app.listen(PORT, function () {
 
 var cart = {
   items: [],
-  total: 0
+  subTotal: 0,
+  tax: 0,
+  total: 0,
 }
 
 items = [
