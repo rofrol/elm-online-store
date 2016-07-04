@@ -4,7 +4,7 @@ module Components.SelectPayment.Update exposing (..)
 
 import Components.SelectPayment.Types exposing (..)
 import Components.SelectPayment.Model exposing (Model)
-import Components.NewCardForm.Update as NewCardFormUpdate
+import Components.Card.Update as CardUpdate
 
 -- UPDATE
 
@@ -14,6 +14,6 @@ update msg model =
     NewCardFormMsg msg ->
       let
         (model', cmds) =
-          NewCardFormUpdate.update msg model.newCard
+          CardUpdate.update msg (model.savedCard, model.newCard)
       in
-        { model | newCard = model' } ! []
+        { model | newCard = snd model' } ! []

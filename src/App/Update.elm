@@ -78,7 +78,7 @@ update msg model =
       CheckoutMsg msg ->
         let
           (checkoutModel, cmd) =
-            CheckoutUpdate.update msg { cart = model.cart, newCard = model.newCard }
+            CheckoutUpdate.update msg { cart = model.cart, newCard = model.newCard, savedCard = model.savedCard }
         in
           { model | cart = checkoutModel.cart, newCard = checkoutModel.newCard }
           ! []

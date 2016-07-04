@@ -9,7 +9,7 @@ import Hop.Types exposing (Location, Query)
 import Components.Menu.Types as MenuTypes
 import Components.Cart.Types as CartTypes
 import Components.Checkout.Types exposing (Msg)
-import GeneralTypes.NewCard exposing (NewCard)
+import Components.Card.Types as CardTypes
 
 -- TYPES
 
@@ -17,7 +17,8 @@ type alias Model =
   { title : String
   , menu : MenuTypes.Menu
   , cart : CartTypes.Cart
-  , newCard : NewCard
+  , newCard : CardTypes.NewCard
+  , savedCard : CardTypes.SavedCard
   , location : Location
   , route : Route
   }

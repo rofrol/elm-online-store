@@ -10,7 +10,8 @@ import Html.App as App
 
 import Components.SelectPayment.Model exposing (Model)
 import Components.SelectPayment.Types exposing (Msg(..))
-import Components.NewCardForm.View as NewCardFormView
+import Components.Card.NewCardFormView as NewCardFormView
+import Components.Card.SavedCardView as SavedCardView
 
 -- VIEW
 
@@ -40,12 +41,7 @@ view model =
           , formValidation
           ]
         , div [ class "layout__item u-1/2" ]
-          [ h4 [ class "u-m0" ] [ text "Saved Card" ]
-          , hr [ class "u-mb" ] []
-          , div [ class "spread" ]
-            [ div [] [ text "Card ending in 2456" ]
-            , button [ class "btn" ] [ text "Order Now" ]
-            ]
+          [ SavedCardView.view
           ]
         ]
       ]

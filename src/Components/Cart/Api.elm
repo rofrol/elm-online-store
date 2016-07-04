@@ -61,7 +61,7 @@ updateSuccess response =
 
 mapToCart : Decoder CartResponse
 mapToCart =
-    object2 CartResponse
+    object4 CartResponse
       ("items" := list
         (object4 CartItem
           ("id" := int)
@@ -70,7 +70,9 @@ mapToCart =
           ("price" := int)
         )
       )
-      ("total" := int)
+      ("subTotal" := float)
+      ("tax" := float)
+      ("total" := float)
 
 -- PAYLOAD BUILDERS
 

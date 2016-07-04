@@ -17,7 +17,7 @@ update msg model =
     SelectPaymentMsg msg ->
       let
         (model', cmds) =
-          SelectPaymentUpdate.update msg { newCard = model.newCard }
+          SelectPaymentUpdate.update msg { newCard = model.newCard, savedCard = model.savedCard }
       in
         { model | newCard = model'.newCard }
         ! []

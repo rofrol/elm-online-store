@@ -23,11 +23,23 @@ update msg model =
       ! [ (addItem item) ]
 
     UpdateCartSuccess response ->
-      Cart response.items response.total False True False
-      ! []
+      let
+        { items, subTotal, tax, total } = response
+      in
+        { model |
+          items = items,
+          subTotal = subTotal,
+          tax = tax,
+          total = total,
+          isLoading = False,
+          isLoaded = True,
+          hasError = False,
+          errorMessage = ""
+        }
+        ! []
 
     UpdateCartFail error ->
-      Cart [] 0 False False True
+      Cart [] 0 0 0 False False True (toString error)
       ! []
 
     SubmitCart ->
@@ -35,4 +47,4 @@ update msg model =
 
 cartLoading : Cart
 cartLoading =
-  Cart [] 0 True False False
+  Cart [] 0 0 0 True False False ""

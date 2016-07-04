@@ -44,5 +44,5 @@ pageView model route =
     CheckoutRoute route ->
       App.map CheckoutMsg
         (Checkout.view route
-          { cart = model.cart, newCard = model.newCard }
+          { cart = model.cart, newCard = model.newCard, savedCard = model.savedCard }
         )

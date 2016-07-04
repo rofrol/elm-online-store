@@ -10,6 +10,7 @@ import Html.Events exposing (..)
 
 import Components.Cart.Types exposing (Cart, Msg(..))
 import Components.LoadingSpinner.View as LoadingSpinner
+import Components.CartSummary.View as CartSummaryView
 
 -- VIEW
 
@@ -19,13 +20,8 @@ view cart =
     cartBody =
       if cart.isLoaded then
         div []
-          [ div [ class "spread u-pb" ]
-            [ span [ class "spread__l" ]
-              [ text "Total:" ]
-            , span [ class "spread__r" ]
-              [ text ("$" ++ (toString cart.total)) ]
-            ]
-          , div [ class "layout" ] (List.map cartItemView cart.items)
+          [ CartSummaryView.view cart
+          , div [ class "layout u-pt" ] (List.map cartItemView cart.items)
           ]
       else
         text ""

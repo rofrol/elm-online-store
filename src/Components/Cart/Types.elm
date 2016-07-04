@@ -16,10 +16,13 @@ type Msg
 
 type alias Cart =
   { items : List CartItem
-  , total : Int
+  , subTotal : Float
+  , tax : Float
+  , total : Float
   , isLoading : Bool
   , isLoaded : Bool
   , hasError : Bool
+  , errorMessage : String
   }
 
 type alias CartItem =
@@ -30,8 +33,10 @@ type alias CartItem =
   }
 
 type alias CartResponse =
-  { items: List CartItem
-  , total : Int
+  { items : List CartItem
+  , subTotal : Float
+  , tax : Float
+  , total : Float
   }
 
 type alias ItemPayload =
