@@ -75,7 +75,7 @@ buildCardPayload card =
 encodeCardPayload : NewCard -> String
 encodeCardPayload card =
     Encode.object
-      [ ( "number", Encode.string card.cardNumber )
+      [ ( "number", Encode.string card.number )
       , ( "name", Encode.string card.name )
       , ( "exp", Encode.string card.exp )
       , ( "cvv", Encode.string card.cvv )
