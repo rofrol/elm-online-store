@@ -45,6 +45,20 @@ app.get('/cart/clear', function (req, res) {
   }, 800)
 });
 
+app.post('/card', function (req, res) {
+  console.log('POST /card');
+  card = {
+      number : req.body.number,
+      name : req.body.name,
+      exp : req.body.exp,
+      cvv : req.body.cvv
+  };
+
+  res.set('Content-Type', 'application/json');
+  setTimeout(function() {
+    res.status(200).send(card);
+  }, 800)
+});
 app.put('/cart/item', function (req, res) {
   console.log('PUT /cart/item');
 
