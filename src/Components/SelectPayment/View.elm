@@ -13,6 +13,7 @@ import Components.SelectPayment.Model exposing (Model)
 import Components.SelectPayment.Types exposing (Msg(..))
 import Components.Card.NewCardFormView as NewCardFormView
 import Components.Card.SavedCardView as SavedCardView
+import Components.Card.Types as CardTypes
 
 -- VIEW
 
@@ -25,6 +26,12 @@ view model =
     formErrorMessage errMsg =
       div [ class "u-txt-red" ] [ text errMsg ]
 
+    newCardOrderButton =
+      if model.newCard.hasError then
+        button [ class "btn btn--disabled", disabled True ] [ text "Order Now" ]
+      else
+        a [ class "btn", onClick UseAndSaveNewCard, href "/#/checkout/summary" ] [ text "Order Now"]
+
   in
     div []
       [ div [ class "layout layout--huge" ]
@@ -35,16 +42,16 @@ view model =
           , div [ class "spread u-mv" ]
             [ label [ class "label" ]
               [ span [ class "u-pr-" ] [ text "Save Card" ]
-              , input [ type' "checkbox", value "text" ] []
+              , input [ type' "checkbox", checked model.newCard.shouldSave, onClick (CardMsg CardTypes.UpdateNewCardShouldSave) ] []
               ]
-            , button [ onClick CheckoutAndSave, classList [("btn", not model.newCard.hasError), ("btn btn--disabled", model.newCard.hasError)], disabled model.newCard.hasError ] [ text "Order Now" ]
+            , newCardOrderButton
             ]
           , formValidation
           ]
         , div [ class "layout__item u-1/2" ]
           [ h4 [ class "u-m0" ] [ text "Saved Card" ]
           , hr [ class "u-mb" ] []
-          , SavedCardView.view model.savedCard
+          , App.map CardMsg (SavedCardView.view model.savedCard)
           ]
         ]
       ]
