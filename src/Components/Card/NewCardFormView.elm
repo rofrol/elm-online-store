@@ -22,10 +22,8 @@ view card =
           , div [] [ text "Name on Card" ]
           ]
         , div [ class "field-set__fields" ]
-          [ input
-            [ value card.cardNumber, maxlength 19, onInput UpdateNewCardNumber, onBlur (MaybeSetErrorMessage CardNumberError)
-            ] []
-          , input [ onInput UpdateNewCardName, onBlur (MaybeSetErrorMessage CardNameError) ] []
+          [ input [ value card.number, maxlength 19, onInput UpdateNewCardNumber, onBlur (MaybeSetErrorMessage CardNumberError) ] []
+          , input [ value card.name, onInput UpdateNewCardName, onBlur (MaybeSetErrorMessage CardNameError) ] []
           ]
         ]
       , div [ class "field-row" ]
