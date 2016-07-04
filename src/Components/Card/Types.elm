@@ -15,6 +15,7 @@ type Msg
   | MaybeClearErrorMessage FormError
   | UpdateNewCardHasError
   | SaveCard
+  | GetSavedCard
   | UpdateSavedCardSuccess SavedCardResponse
   | UpdateSavedCardFail Http.Error
 
@@ -37,7 +38,7 @@ type alias SavedCardResponse =
   }
 
 type alias NewCard =
-  { cardNumber : String
+  { number: String
   , name : String
   , exp : String
   , cvv : String
