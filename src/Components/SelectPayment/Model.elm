@@ -7,6 +7,6 @@ import Components.Card.Types exposing (NewCard, SavedCard)
 -- TYPES
 
 type alias Model =
-  { newCard : NewCard
-  , savedCard : SavedCard
+  { savedCard : SavedCard
+  , newCard : NewCard
   }
