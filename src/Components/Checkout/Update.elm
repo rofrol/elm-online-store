@@ -19,5 +19,5 @@ update msg model =
         (model', cmds) =
           SelectPaymentUpdate.update msg { newCard = model.newCard, savedCard = model.savedCard }
       in
-        { model | newCard = model'.newCard }
-        ! []
+        { model | newCard = model'.newCard, savedCard = model'.savedCard }
+        ! [ Cmd.map SelectPaymentMsg cmds ]
