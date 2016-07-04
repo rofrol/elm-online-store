@@ -4,16 +4,36 @@ module Components.Card.SavedCardView exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import String
+
+-- OUR MODULES
+
+import Components.Card.Types exposing (SavedCard)
 
 -- VIEW
 
-view : Html a
-view =
-  div []
-    [ h4 [ class "u-m0" ] [ text "Saved Card" ]
-    , hr [ class "u-mb" ] []
-    , div [ class "spread" ]
-      [ div [] [ text "Card ending in 2456" ]
-      , button [ class "btn" ] [ text "Order Now" ]
+view : SavedCard -> Html a
+view savedCard =
+  let
+    last4 =
+      String.right 4 savedCard.number
+
+    savedCardView =
+      if String.isEmpty savedCard.number then
+        text ""
+      else
+        div [ class "spread" ]
+          [ div [] [ text ("Card ending in " ++ last4) ]
+          , button [ class "btn" ] [ text "Order Now" ]
+          ]
+
+    noSavedCards =
+      if String.isEmpty savedCard.number then
+        div [] [ text "You have no saved cards" ]
+      else
+        text ""
+  in
+    div []
+      [ savedCardView
+      , noSavedCards
       ]
-    ]
