@@ -111,6 +111,13 @@ app.listen(PORT, function () {
   console.log('Running server on port: ', PORT);
 });
 
+var card = {
+  number: "",
+  name: "",
+  exp: "",
+  cvv: ""
+};
+
 var cart = {
   items: [],
   subTotal: 0,
