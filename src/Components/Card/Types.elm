@@ -14,8 +14,10 @@ type Msg
   | MaybeSetErrorMessage FormError
   | MaybeClearErrorMessage FormError
   | UpdateNewCardHasError
+  | UpdateNewCardShouldSave
   | SaveCard
   | GetSavedCard
+  | UseSavedCard
   | UpdateSavedCardSuccess SavedCardResponse
   | UpdateSavedCardFail Http.Error
 
