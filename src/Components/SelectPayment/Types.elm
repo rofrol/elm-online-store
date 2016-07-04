@@ -7,4 +7,5 @@ import Components.Card.Types as CardTypes
 -- TYPES
 
 type Msg
-  = NewCardFormMsg CardTypes.Msg
+  = CardMsg CardTypes.Msg
+  | CheckoutAndSave
