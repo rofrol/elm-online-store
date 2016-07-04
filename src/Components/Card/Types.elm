@@ -24,6 +24,7 @@ type alias SavedCard =
   , name : String
   , exp : String
   , cvv : String
+  , shouldUse : Bool
   , isLoading : Bool
   , isLoaded : Bool
   , hasError : Bool
@@ -42,7 +43,9 @@ type alias NewCard =
   , name : String
   , exp : String
   , cvv : String
+  , shouldUse : Bool
   , hasError : Bool
+  , shouldSave : Bool
   , errorMessages : List String
   }
 
