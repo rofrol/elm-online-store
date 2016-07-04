@@ -8,4 +8,6 @@ import Components.Card.Types as CardTypes
 
 type Msg
   = CardMsg CardTypes.Msg
-  | CheckoutAndSave
+  | UseAndSaveNewCard
+  | SaveNewCard
+  | UseNewCard
