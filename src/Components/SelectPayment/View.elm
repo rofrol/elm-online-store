@@ -4,6 +4,7 @@ module Components.SelectPayment.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Html.App as App
 
 -- OUR MODULES
@@ -30,18 +31,20 @@ view model =
         [ div [ class "layout__item u-1/2" ]
           [ h4 [ class "u-m0" ] [ text "New Card" ]
           , hr [ class "u-mb" ] []
-          , App.map NewCardFormMsg (NewCardFormView.view model.newCard)
+          , App.map CardMsg (NewCardFormView.view model.newCard)
           , div [ class "spread u-mv" ]
             [ label [ class "label" ]
               [ span [ class "u-pr-" ] [ text "Save Card" ]
               , input [ type' "checkbox", value "text" ] []
               ]
-            , button [ classList [("btn", not model.newCard.hasError), ("btn btn--disabled", model.newCard.hasError)], disabled model.newCard.hasError ] [ text "Order Now" ]
+            , button [ onClick CheckoutAndSave, classList [("btn", not model.newCard.hasError), ("btn btn--disabled", model.newCard.hasError)], disabled model.newCard.hasError ] [ text "Order Now" ]
             ]
           , formValidation
           ]
         , div [ class "layout__item u-1/2" ]
-          [ SavedCardView.view
+          [ h4 [ class "u-m0" ] [ text "Saved Card" ]
+          , hr [ class "u-mb" ] []
+          , SavedCardView.view model.savedCard
           ]
         ]
       ]
