@@ -42,3 +42,4 @@ type Msg
   | MenuMsg MenuTypes.Msg
   | CheckoutMsg Components.Checkout.Types.Msg
   | CartMsg CartTypes.Msg
+  | CardMsg CardTypes.Msg
