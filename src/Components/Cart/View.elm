@@ -11,6 +11,7 @@ import Html.Events exposing (..)
 import Components.Cart.Types exposing (Cart, Msg(..))
 import Components.LoadingSpinner.View as LoadingSpinner
 import Components.CartSummary.View as CartSummaryView
+import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
 
@@ -38,7 +39,7 @@ view cart =
       if (List.length cart.items) > 0 then
         div []
           [ button [ class "btn btn--full btn--negative u-mb-", onClick ClearCart ] [ text "Clear Cart" ]
-          , a [ href "/#/checkout/select-payment", class "btn btn--full" ] [ text "checkout" ]
+          , a [ href (makeUrl "checkout/select-payment"), class "btn btn--full" ] [ text "checkout" ]
           ]
       else
         text ""

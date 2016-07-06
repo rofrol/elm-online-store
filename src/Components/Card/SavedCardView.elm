@@ -10,6 +10,7 @@ import String
 -- OUR MODULES
 
 import Components.Card.Types exposing (..)
+import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
 
@@ -25,7 +26,7 @@ view savedCard =
       else
         div [ class "spread" ]
           [ div [] [ text ("Card ending in " ++ last4) ]
-          , a [ onClick UseSavedCard, class "btn", href "/#/checkout/summary" ] [ text "Order Now" ]
+          , a [ onClick UseSavedCard, class "btn", href (makeUrl "checkout/summary") ] [ text "Order Now" ]
           ]
 
     noSavedCards =

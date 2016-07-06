@@ -14,6 +14,7 @@ import Components.SelectPayment.Types exposing (Msg(..))
 import Components.Card.NewCardFormView as NewCardFormView
 import Components.Card.SavedCardView as SavedCardView
 import Components.Card.Types as CardTypes
+import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
 
@@ -30,7 +31,7 @@ view model =
       if model.newCard.hasError then
         button [ class "btn btn--disabled", disabled True ] [ text "Order Now" ]
       else
-        a [ class "btn", onClick UseAndSaveNewCard, href "/#/checkout/summary" ] [ text "Order Now"]
+        a [ class "btn", onClick UseAndSaveNewCard, href (makeUrl "checkout/summary") ] [ text "Order Now"]
 
   in
     div []
