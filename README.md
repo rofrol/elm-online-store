@@ -1,7 +1,7 @@
 # elm-online-store
 An example online store app written in elm
 
-To see the app in action, go to http://www.zachwilliamson.me
+To see the app in action, go to http://zachwilliamson.me/apps/elm-online-store-example
 
 To run the app locally, do the following:
 
