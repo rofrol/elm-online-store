@@ -1,4 +1,4 @@
-module Components.CheckoutSummary.View exposing (..)
+module Pages.Checkout.OrderSummary.View exposing (..)
 
 -- CORE MODULES
 

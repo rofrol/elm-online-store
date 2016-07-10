@@ -1,4 +1,4 @@
-module Components.SelectPayment.View exposing (..)
+module Pages.Checkout.SelectPayment.View exposing (..)
 
 -- CORE MODULES
 
@@ -9,11 +9,11 @@ import Html.App as App
 
 -- OUR MODULES
 
-import Components.SelectPayment.Model exposing (Model)
-import Components.SelectPayment.Types exposing (Msg(..))
-import Components.Card.NewCardFormView as NewCardFormView
-import Components.Card.SavedCardView as SavedCardView
-import Components.Card.Types as CardTypes
+import Pages.Checkout.SelectPayment.Model exposing (Model)
+import Pages.Checkout.SelectPayment.Types exposing (Msg(..))
+import Components.NewCard.View as NewCardView
+import Components.SavedCard.View as SavedCardView
+import Components.NewCard.Types as CardTypes
 import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
@@ -39,11 +39,11 @@ view model =
         [ div [ class "layout__item u-1/2" ]
           [ h4 [ class "u-m0" ] [ text "New Card" ]
           , hr [ class "u-mb" ] []
-          , App.map CardMsg (NewCardFormView.view model.newCard)
+          , App.map NewCardMsg (NewCardView.view model.newCard)
           , div [ class "spread u-mv" ]
             [ label [ class "label" ]
               [ span [ class "u-pr-" ] [ text "Save Card" ]
-              , input [ type' "checkbox", checked model.newCard.shouldSave, onClick (CardMsg CardTypes.UpdateNewCardShouldSave) ] []
+              , input [ type' "checkbox", checked model.newCard.shouldSave, onClick (NewCardMsg CardTypes.UpdateNewCardShouldSave) ] []
               ]
             , newCardOrderButton
             ]
@@ -52,7 +52,7 @@ view model =
         , div [ class "layout__item u-1/2" ]
           [ h4 [ class "u-m0" ] [ text "Saved Card" ]
           , hr [ class "u-mb" ] []
-          , App.map CardMsg (SavedCardView.view model.savedCard)
+          , App.map SavedCardMsg (SavedCardView.view model.savedCard)
           ]
         ]
       ]

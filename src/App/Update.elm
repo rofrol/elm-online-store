@@ -13,11 +13,12 @@ import Update.Extra exposing (andThen)
 import App.Types exposing (Model, Msg(..), Route(..))
 import Components.Menu.Types as MenuTypes
 import Components.Cart.Types as CartTypes
-import Components.Card.Types as CardTypes
+import Components.SavedCard.Types as SavedCardTypes
 import Components.Menu.Update as MenuUpdate
 import Components.Cart.Update as CartUpdate
-import Components.Checkout.Update as CheckoutUpdate
-import Components.Card.Update as CardUpdate
+import Pages.Menu.Update as PageMenuUpdate
+import Pages.Checkout.Update as CheckoutUpdate
+import Components.SavedCard.Update as SavedCardUpdate
 import Ports.Debug exposing (debug)
 
 -- UPDATE
@@ -51,17 +52,15 @@ update msg model =
         in
           ( model, command )
 
-      -- MENU
+      -- MODEL UPDATES
 
       MenuMsg msg ->
         let
-          (menuModel, cmd) =
-            MenuUpdate.update msg { menu = model.menu, cart = model.cart }
+          (model', cmds) =
+            MenuUpdate.update msg model.menu
         in
-          { model | menu = menuModel.menu, cart = menuModel.cart }
-          ! [ Cmd.map MenuMsg cmd ]
-
-      -- CART
+          { model | menu = model' }
+          ! [ Cmd.map MenuMsg cmds ]
 
       CartMsg msg ->
         let
@@ -71,26 +70,31 @@ update msg model =
           { model | cart = newCart }
           ! [ Cmd.map CartMsg cmd ]
 
-      -- CHECKOUT
+      SavedCardMsg msg ->
+        let
+          (model', cmds) =
+            SavedCardUpdate.update msg model.savedCard
+        in
+          { model | savedCard = model' }
+          ! [ Cmd.map SavedCardMsg cmds ]
 
-      CheckoutMsg msg ->
+      -- PAGE UPDATES
+
+      PageMenuMsg msg ->
+        let
+          (menuModel, cmd) =
+            PageMenuUpdate.update msg { menu = model.menu, cart = model.cart }
+        in
+          { model | menu = menuModel.menu, cart = menuModel.cart }
+          ! [ Cmd.map PageMenuMsg cmd ]
+
+      PageCheckoutMsg msg ->
         let
           (checkoutModel, cmds) =
             CheckoutUpdate.update msg { cart = model.cart, newCard = model.newCard, savedCard = model.savedCard }
         in
           { model | cart = checkoutModel.cart, newCard = checkoutModel.newCard, savedCard = checkoutModel.savedCard }
-          ! [ Cmd.map CheckoutMsg cmds ]
-
-      -- CardMsg
-
-      CardMsg msg ->
-        let
-          (model', cmds) =
-            CardUpdate.update msg ( model.savedCard, model.newCard )
-        in
-          { model | savedCard = fst model', newCard = snd model' }
-          ! [ Cmd.map CardMsg cmds ]
-
+          ! [ Cmd.map PageCheckoutMsg cmds ]
 
 -- URL UPDATE
 
@@ -135,6 +139,6 @@ getCart (model, cmd) =
 getSavedCard : (Model, Cmd Msg) -> (Model, Cmd Msg)
 getSavedCard (model, cmd) =
   if not model.savedCard.isLoaded then
-    andThen update (CardMsg CardTypes.GetSavedCard) (model, cmd)
+    andThen update (SavedCardMsg SavedCardTypes.GetSavedCard) (model, cmd)
   else
     (model, cmd)

@@ -1,9 +1,10 @@
-module Components.Checkout.Model exposing (..)
+module Pages.Checkout.Model exposing (..)
 
 -- OUR MODULES
 
 import Components.Cart.Types exposing (Cart)
-import Components.Card.Types exposing (NewCard, SavedCard)
+import Components.NewCard.Types exposing (NewCard)
+import Components.SavedCard.Types exposing (SavedCard)
 
 -- MODEL
 

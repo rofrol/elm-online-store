@@ -1,4 +1,4 @@
-module Components.CartSummary.View exposing (..)
+module Components.Cart.SummaryView exposing (..)
 
 -- CORE MODULES
 

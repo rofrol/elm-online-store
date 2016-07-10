@@ -1,4 +1,4 @@
-module Components.Card.NewCardFormView exposing (..)
+module Components.NewCard.View exposing (..)
 
 -- CORE MODULES
 
@@ -8,7 +8,7 @@ import Html.Events exposing (onClick, onInput, onBlur)
 
 -- OUR MODULES
 
-import Components.Card.Types exposing (..)
+import Components.NewCard.Types exposing (..)
 
 -- VIEW
 

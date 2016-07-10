@@ -1,4 +1,4 @@
-module Components.Card.Api exposing (getSavedCard, saveCard)
+module Components.SavedCard.Api exposing (getSavedCard, saveCard)
 
 -- CORE MODULES
 
@@ -10,7 +10,8 @@ import Json.Encode as Encode
 -- OUR MODULES
 
 import App.Config exposing (host)
-import Components.Card.Types exposing (..)
+import Components.SavedCard.Types exposing (..)
+import Components.NewCard.Types exposing (NewCard)
 
 -- HEADERS
 

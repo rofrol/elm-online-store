@@ -1,4 +1,4 @@
-module Components.Checkout.View exposing (..)
+module Pages.Checkout.View exposing (..)
 
 -- CORE MODULES
 
@@ -8,14 +8,13 @@ import Html.App as App
 
 -- OUR MODULES
 
-import Components.Checkout.Model exposing (Model)
-import Components.Checkout.Types exposing (..)
+import Pages.Checkout.Model exposing (Model)
+import Pages.Checkout.Types exposing (..)
 import App.Types exposing (CheckoutSubRoute(..))
-import Components.Checkout.Types exposing (Msg)
-import Components.SelectPayment.View as SelectPaymentView
-import Components.CheckoutSummary.View as CheckoutSummaryView
+import Pages.Checkout.SelectPayment.View as SelectPaymentView
+import Pages.Checkout.OrderSummary.View as OrderSummaryView
 import Components.LoadingSpinner.View as LoadingSpinnerView
-import Components.CartSummary.View as CartSummaryView
+import Components.Cart.SummaryView as CartSummaryView
 
 -- VIEW
 
@@ -28,7 +27,7 @@ view route model =
           App.map SelectPaymentMsg
             (SelectPaymentView.view { newCard = model.newCard, savedCard = model.savedCard})
         CheckoutSummary ->
-          CheckoutSummaryView.view
+          OrderSummaryView.view
 
     topView =
       if model.cart.isLoaded then

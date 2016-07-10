@@ -1,4 +1,4 @@
-module Components.Menu.View exposing (..)
+module Pages.Menu.View exposing (..)
 
 -- CORE MODULES
 
@@ -8,17 +8,18 @@ import Html.App as App
 
 -- OUR MODULES
 
-import Components.Menu.Types exposing (Menu, Msg(..))
-import Components.Menu.Model exposing (Model)
+import Pages.Menu.Model exposing (Model)
+import Pages.Menu.Types exposing (Msg(..))
+import Components.Menu.Types exposing (Msg(UpdateItemQty))
 import Components.Cart.Types as CartTypes
-import Components.Cart.View as CartView
+import Components.Cart.ItemsView as CartView
 import Components.Counter.View as CounterView
 import Components.LoadingSpinner.View as LoadingSpinnerView
 import Components.AsyncButton.View as AsyncButtonView
 
 -- VIEW
 
-view : Model -> Html Msg
+view : Model -> Html Pages.Menu.Types.Msg
 view model =
   let
     menu = model.menu
@@ -29,11 +30,11 @@ view model =
       div [ class "layout__item u-1/2 u-pb++ u-pr++" ]
         [ h1 [] [ text item.name ]
         , h3 [] [ text ("$" ++ (toString item.price) ) ]
-        , div [ class "u-pv" ]
-          [ App.map
-            (UpdateItemQty item.id)
-            (CounterView.view item.qty (Just 0) Nothing)
-          ]
+        -- , div [ class "u-pv" ]
+        --   [ App.map
+        --     (MenuMsg <| UpdateItemQty <| item.id)
+        --     (CounterView.view item.qty (Just 0) Nothing)
+        --   ]
         , AsyncButtonView.view
             cart.isLoading
             (CartMsg <| CartTypes.AddItemToCart <| buildItemPayload <| item)

@@ -1,4 +1,4 @@
-module Components.Menu.Model exposing (..)
+module Pages.Menu.Model exposing (..)
 
 -- OUR MODULES
 

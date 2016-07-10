@@ -1,4 +1,4 @@
-module Components.Card.Types exposing (..)
+module Components.NewCard.Types exposing (..)
 
 -- CORE MODULES
 
@@ -15,30 +15,6 @@ type Msg
   | MaybeClearErrorMessage FormError
   | UpdateNewCardHasError
   | UpdateNewCardShouldSave
-  | SaveCard
-  | GetSavedCard
-  | UseSavedCard
-  | UpdateSavedCardSuccess SavedCardResponse
-  | UpdateSavedCardFail Http.Error
-
-type alias SavedCard =
-  { number : String
-  , name : String
-  , exp : String
-  , cvv : String
-  , shouldUse : Bool
-  , isLoading : Bool
-  , isLoaded : Bool
-  , hasError : Bool
-  , errorMessage : String
-  }
-
-type alias SavedCardResponse =
-  { number : String
-  , name : String
-  , exp : String
-  , cvv : String
-  }
 
 type alias NewCard =
   { number: String

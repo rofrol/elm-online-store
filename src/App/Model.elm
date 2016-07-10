@@ -10,7 +10,8 @@ import App.Types exposing (Route, Model, Msg)
 import App.Update exposing (urlUpdate)
 import Components.Menu.Types exposing (Menu)
 import Components.Cart.Types exposing (Cart)
-import Components.Card.Types exposing (NewCard, SavedCard)
+import Components.NewCard.Types exposing (NewCard)
+import Components.SavedCard.Types exposing (SavedCard)
 
 -- INIT
 

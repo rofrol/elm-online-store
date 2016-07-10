@@ -1,4 +1,4 @@
-module Components.Cart.View exposing (..)
+module Components.Cart.ItemsView exposing (..)
 
 -- CORE MODULES
 
@@ -10,7 +10,7 @@ import Html.Events exposing (..)
 
 import Components.Cart.Types exposing (Cart, Msg(..))
 import Components.LoadingSpinner.View as LoadingSpinner
-import Components.CartSummary.View as CartSummaryView
+import Components.Cart.SummaryView as CartSummaryView
 import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW

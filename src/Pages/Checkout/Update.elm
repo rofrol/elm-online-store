@@ -1,13 +1,13 @@
-module Components.Checkout.Update exposing (..)
+module Pages.Checkout.Update exposing (..)
 
 -- CORE MODULES
 
 
 -- OUR MODULES
 
-import Components.SelectPayment.Update as SelectPaymentUpdate
-import Components.Checkout.Types exposing (..)
-import Components.Checkout.Model exposing (Model)
+import Pages.Checkout.SelectPayment.Update as SelectPaymentUpdate
+import Pages.Checkout.Types exposing (..)
+import Pages.Checkout.Model exposing (Model)
 
 -- UPDATE
 

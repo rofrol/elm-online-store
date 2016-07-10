@@ -16,7 +16,6 @@ type Msg
   | GetMenu
   | UpdateMenuSuccess MenuResponse
   | UpdateMenuFail Http.Error
-  | CartMsg CartTypes.Msg
 
 type alias Menu =
   { items : List MenuItem
@@ -38,7 +37,6 @@ type alias MenuItemResponse =
   , name : String
   , price : Int
   }
-
 
 type alias MenuResponse =
   { items: List MenuItemResponse

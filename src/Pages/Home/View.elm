@@ -1,4 +1,4 @@
-module Components.Home.View exposing (..)
+module Pages.Home.View exposing (..)
 
 -- CORE MODULES
 

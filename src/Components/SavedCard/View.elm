@@ -1,4 +1,4 @@
-module Components.Card.SavedCardView exposing (..)
+module Components.SavedCard.View exposing (..)
 
 -- CORE MODULES
 
@@ -9,7 +9,7 @@ import String
 
 -- OUR MODULES
 
-import Components.Card.Types exposing (..)
+import Components.SavedCard.Types exposing (..)
 import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW

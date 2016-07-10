@@ -9,9 +9,9 @@ import Html.App as App
 -- OUR MODULES
 
 import App.Types exposing (Model, Msg(..), Route(..))
-import Components.Home.View as Home
-import Components.Menu.View as Menu
-import Components.Checkout.View as Checkout
+import Pages.Home.View as Home
+import Pages.Menu.View as Menu
+import Pages.Checkout.View as Checkout
 
 -- VIEW
 
@@ -39,10 +39,10 @@ pageView model route =
       div [ ] [ text "Route Not Found" ]
 
     MenuRoute ->
-      App.map MenuMsg (Menu.view { menu = model.menu, cart = model.cart })
+      App.map PageMenuMsg (Menu.view { menu = model.menu, cart = model.cart })
 
     CheckoutRoute route ->
-      App.map CheckoutMsg
+      App.map PageCheckoutMsg
         (Checkout.view route
           { cart = model.cart, newCard = model.newCard, savedCard = model.savedCard }
         )

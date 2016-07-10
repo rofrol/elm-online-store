@@ -6,19 +6,21 @@ import Hop.Types exposing (Location, Query)
 
 -- OUR MODULES
 
-import Components.Menu.Types as MenuTypes
-import Components.Cart.Types as CartTypes
-import Components.Checkout.Types exposing (Msg)
-import Components.Card.Types as CardTypes
+import Components.Menu.Types as MenuTypes exposing (Menu)
+import Components.Cart.Types as CartTypes exposing (Cart)
+import Pages.Checkout.Types exposing (Msg)
+import Pages.Menu.Types as PageMenuTypes
+import Components.NewCard.Types exposing (NewCard)
+import Components.SavedCard.Types as SavedCardTypes exposing (SavedCard)
 
 -- TYPES
 
 type alias Model =
   { title : String
-  , menu : MenuTypes.Menu
-  , cart : CartTypes.Cart
-  , newCard : CardTypes.NewCard
-  , savedCard : CardTypes.SavedCard
+  , menu : Menu
+  , cart : Cart
+  , newCard : NewCard
+  , savedCard : SavedCard
   , location : Location
   , route : Route
   }
@@ -40,6 +42,7 @@ type Msg
   | NavigateTo String
   | SetQuery Query
   | MenuMsg MenuTypes.Msg
-  | CheckoutMsg Components.Checkout.Types.Msg
+  | PageMenuMsg PageMenuTypes.Msg
+  | PageCheckoutMsg Pages.Checkout.Types.Msg
   | CartMsg CartTypes.Msg
-  | CardMsg CardTypes.Msg
+  | SavedCardMsg SavedCardTypes.Msg
