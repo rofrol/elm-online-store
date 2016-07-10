@@ -4,18 +4,14 @@ module Components.Cart.ItemsView exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 
 -- OUR MODULES
 
 import Components.Cart.Types exposing (Cart, Msg(..))
-import Components.LoadingSpinner.View as LoadingSpinner
-import Components.Cart.SummaryView as CartSummaryView
-import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
 
-view : Cart -> Html Msg
+view : Cart -> Html a
 view cart =
   let
     cartItemView item =
