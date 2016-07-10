@@ -13,7 +13,7 @@ import Pages.Menu.Model exposing (Model)
 import Pages.Menu.Types exposing (Msg(..))
 import Components.Menu.Types as MenuTypes
 import Components.Cart.Types as CartTypes
-import Components.Cart.ItemsView as CartView
+import Components.Cart.View as CartView
 import Components.LoadingSpinner.View as LoadingSpinnerView
 import Components.AsyncButton.View as AsyncButtonView
 
@@ -36,7 +36,7 @@ view model =
 
     menuItem item =
       div [ class "layout__item u-1/2 u-pb++ u-pr++" ]
-        [ h1 [] [ text item.name ]
+        [ h2 [] [ text item.name ]
         , h3 [] [ text ("$" ++ (toString item.price) ) ]
         , div [ class "u-pv" ]
           [ button [ class (decrementQtyClass item.qty), onClick (MenuMsg <| MenuTypes.DecrementItemQty <| item.id) ] [ text "-" ]
