@@ -25,13 +25,14 @@ view route model =
       case route of
         SelectPayment ->
           App.map SelectPaymentMsg
-            (SelectPaymentView.view { newCard = model.newCard, savedCard = model.savedCard})
+            (SelectPaymentView.view { newCard = model.newCard, savedCard = model.savedCard } )
         CheckoutSummary ->
-          OrderSummaryView.view
+          App.map OrderSummaryMsg
+            (OrderSummaryView.view { cart = model.cart, savedCard = model.savedCard, newCard = model.newCard } )
 
     topView =
       if model.cart.isLoaded then
-        div [ class "layout u-pb+" ]
+        div [ class "layout" ]
           [ div [ class "layout__item u-3/5"]
             [ text "Ordering from: Elm Street"
             ]
@@ -45,5 +46,6 @@ view route model =
     div []
       [ LoadingSpinnerView.view model.cart.isLoading Nothing
       , topView
+      , hr [ class "u-mv u-mb+" ] []
       , subView
       ]
