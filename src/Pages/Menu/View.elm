@@ -4,16 +4,16 @@ module Pages.Menu.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Html.App as App
 
 -- OUR MODULES
 
 import Pages.Menu.Model exposing (Model)
 import Pages.Menu.Types exposing (Msg(..))
-import Components.Menu.Types exposing (Msg(UpdateItemQty))
+import Components.Menu.Types as MenuTypes
 import Components.Cart.Types as CartTypes
 import Components.Cart.ItemsView as CartView
-import Components.Counter.View as CounterView
 import Components.LoadingSpinner.View as LoadingSpinnerView
 import Components.AsyncButton.View as AsyncButtonView
 
@@ -23,18 +23,26 @@ view : Model -> Html Pages.Menu.Types.Msg
 view model =
   let
     menu = model.menu
-
     cart = model.cart
+
+    decrementQtyClass qty =
+      let baseClass =
+        "btn btn--small u-mr"
+      in
+        if qty == 0 then
+          baseClass ++ " u-invisible"
+        else
+          baseClass
 
     menuItem item =
       div [ class "layout__item u-1/2 u-pb++ u-pr++" ]
         [ h1 [] [ text item.name ]
         , h3 [] [ text ("$" ++ (toString item.price) ) ]
-        -- , div [ class "u-pv" ]
-        --   [ App.map
-        --     (MenuMsg <| UpdateItemQty <| item.id)
-        --     (CounterView.view item.qty (Just 0) Nothing)
-        --   ]
+        , div [ class "u-pv" ]
+          [ button [ class (decrementQtyClass item.qty), onClick (MenuMsg <| MenuTypes.DecrementItemQty <| item.id) ] [ text "-" ]
+          , span [] [ text (toString item.qty) ]
+          , button [ class ("btn btn--small u-ml"), onClick (MenuMsg <| MenuTypes.IncrementItemQty <| item.id) ] [ text "+" ]
+          ]
         , AsyncButtonView.view
             cart.isLoading
             (CartMsg <| CartTypes.AddItemToCart <| buildItemPayload <| item)

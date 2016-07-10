@@ -4,15 +4,12 @@ module Components.Menu.Types exposing (..)
 
 import Http
 
--- OUR MODULES
-
-import Components.Counter.Types as Counter
-import Components.Cart.Types as CartTypes
-
 -- TYPES
 
 type Msg
-  = UpdateItemQty Int Counter.Msg
+  = IncrementItemQty Int
+  | DecrementItemQty Int
+  | UpdateItemQty Int Int
   | GetMenu
   | UpdateMenuSuccess MenuResponse
   | UpdateMenuFail Http.Error

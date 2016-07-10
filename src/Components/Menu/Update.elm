@@ -4,23 +4,28 @@ module Components.Menu.Update exposing (..)
 
 import Components.Menu.Types exposing (Menu, MenuItem, MenuItemResponse, Msg(..))
 import Components.Menu.Api exposing (getMenu)
-import Components.Counter.Update as Counter
 
 -- UPDATE
 
 update : Msg -> Menu -> (Menu, Cmd Msg)
 update msg menu =
   case msg of
-    UpdateItemQty id msg ->
+    UpdateItemQty id value ->
       let
         updateItem item =
           if item.id == id then
-            { item | qty = Counter.update msg item.qty }
+            { item | qty = item.qty + value }
           else
             item
       in
         { menu | items = List.map updateItem menu.items }
         ! []
+
+    IncrementItemQty id ->
+      update (UpdateItemQty id 1) menu
+
+    DecrementItemQty id ->
+      update (UpdateItemQty id -1) menu
 
     GetMenu ->
       (Menu [] 0 True False False)
