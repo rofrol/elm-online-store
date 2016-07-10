@@ -11,6 +11,7 @@ import String
 
 import Components.SavedCard.Types exposing (..)
 import UtilsAndConstants.MakeUrl exposing (makeUrl)
+import Components.LoadingSpinner.View as LoadingSpinnerView
 
 -- VIEW
 
@@ -36,7 +37,9 @@ view savedCard isReadOnly =
           ]
 
     noSavedCards =
-      if String.isEmpty savedCard.number then
+      if savedCard.isLoading then
+        LoadingSpinnerView.view savedCard.isLoading Nothing
+      else if String.isEmpty savedCard.number then
         div [] [ text "You have no saved cards" ]
       else
         text ""
