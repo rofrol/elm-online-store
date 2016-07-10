@@ -12,10 +12,10 @@ update msg model =
       let
         (model', cmds) = MenuUpdate.update msg model.menu
       in
-        { model | menu = model'} ! [ Cmd.map MenuMsg cmds ]
+        { model | menu = model' } ! [ Cmd.map MenuMsg cmds ]
 
     CartMsg msg ->
       let
         (model', cmds) = CartUpdate.update msg model.cart
       in
-        { model | cart = model'} ! [ Cmd.map CartMsg cmds ]
+        { model | cart = model' } ! [ Cmd.map CartMsg cmds ]
