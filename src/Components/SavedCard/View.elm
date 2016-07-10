@@ -14,11 +14,17 @@ import UtilsAndConstants.MakeUrl exposing (makeUrl)
 
 -- VIEW
 
-view : SavedCard -> Html Msg
-view savedCard =
+view : SavedCard -> Bool -> Html Msg
+view savedCard isReadOnly =
   let
     last4 =
       String.right 4 savedCard.number
+
+    cta =
+      if isReadOnly  then
+        text ""
+      else
+        a [ onClick UseSavedCard, class "btn", href (makeUrl "checkout/summary") ] [ text "Order Now" ]
 
     savedCardView =
       if String.isEmpty savedCard.number then
@@ -26,7 +32,7 @@ view savedCard =
       else
         div [ class "spread" ]
           [ div [] [ text ("Card ending in " ++ last4) ]
-          , a [ onClick UseSavedCard, class "btn", href (makeUrl "checkout/summary") ] [ text "Order Now" ]
+          , cta
           ]
 
     noSavedCards =
