@@ -21,3 +21,6 @@ update msg model =
       in
         { model | newCard = model'.newCard, savedCard = model'.savedCard }
         ! [ Cmd.map SelectPaymentMsg cmds ]
+
+    OrderSummaryMsg msg ->
+      model ! []
