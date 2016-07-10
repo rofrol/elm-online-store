@@ -37,8 +37,7 @@ view model =
     div []
       [ div [ class "layout layout--huge" ]
         [ div [ class "layout__item u-1/2" ]
-          [ h4 [ class "u-m0" ] [ text "New Card" ]
-          , hr [ class "u-mb" ] []
+          [ h4 [] [ text "New Card" ]
           , App.map NewCardMsg (NewCardView.view model.newCard)
           , div [ class "spread u-mv" ]
             [ label [ class "label" ]
@@ -50,9 +49,8 @@ view model =
           , formValidation
           ]
         , div [ class "layout__item u-1/2" ]
-          [ h4 [ class "u-m0" ] [ text "Saved Card" ]
-          , hr [ class "u-mb" ] []
-          , App.map SavedCardMsg (SavedCardView.view model.savedCard)
+          [ h4 [] [ text "Saved Card" ]
+          , App.map SavedCardMsg (SavedCardView.view model.savedCard False)
           ]
         ]
       ]
