@@ -7,7 +7,6 @@ import Pages.Checkout.SelectPayment.Model exposing (Model)
 import Components.SavedCard.Update as SavedCardUpdate
 import Components.SavedCard.Types as SavedCardTypes
 import Components.NewCard.Update as NewCardUpdate
-import Components.NewCard.Types as NewCardTypes
 import Update.Extra exposing (andThen)
 
 -- UPDATE

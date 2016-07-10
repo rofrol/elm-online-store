@@ -1,9 +1,5 @@
 module Components.NewCard.Types exposing (..)
 
--- CORE MODULES
-
-import Http
-
 -- TYPES
 
 type Msg
