@@ -2,52 +2,38 @@ module Components.Cart.Api exposing (addItem, getCart, clearCart)
 
 -- CORE MODULES
 
-import Http exposing (defaultSettings, Request)
-import Task
+import Http
 import Json.Decode exposing (..)
 import Json.Encode as Encode
 
 -- OUR MODULES
 
 import Components.Cart.Types exposing (Cart, CartResponse, CartItem, Msg(..), ItemPayload)
-import App.Config exposing (host)
-
--- HEADERS
-
-headers : List ( String, String )
-headers =
-  [ ( "Content-Type", "application/json" )
-  ]
+import UtilsAndConstants.Api exposing (send, put, get)
 
 -- API CALLS
 
 getCart : Cmd Msg
 getCart =
-  Http.get mapToCart (host ++ "/cart")
-    |> Task.perform updateFail updateSuccess
+  get' "/cart"
 
 clearCart : Cmd Msg
 clearCart =
-  Http.get mapToCart (host ++ "/cart/clear")
-    |> Task.perform updateFail updateSuccess
+  get' "/cart/clear"
 
 addItem : ItemPayload -> Cmd Msg
 addItem item =
-  let
-    payload =
-      buildCartItemPayload item
-    request =
-      Request "PUT" headers (host ++ "/cart/item") payload
-  in
-    send request
+  put' "/cart/item" (buildCartItemPayload item)
 
 -- HELPERS
 
-send : Request -> Cmd Msg
-send request =
-  Http.send defaultSettings request
-    |> Http.fromJson mapToCart
-    |> Task.perform updateFail updateSuccess
+get' : String -> Cmd Msg
+get' url =
+  get url mapToCart updateFail updateSuccess
+
+put' : String -> Http.Body -> Cmd Msg
+put' url payload =
+  put url payload mapToCart updateFail updateSuccess
 
 updateFail : Http.Error -> Msg
 updateFail error =
