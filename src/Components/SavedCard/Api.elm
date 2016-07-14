@@ -2,16 +2,15 @@ module Components.SavedCard.Api exposing (getSavedCard, saveCard)
 
 -- CORE MODULES
 
-import Http exposing (defaultSettings, Request)
-import Task
+import Http
 import Json.Decode exposing (..)
 import Json.Encode as Encode
 
 -- OUR MODULES
 
-import App.Config exposing (host)
 import Components.SavedCard.Types exposing (..)
 import Components.NewCard.Types exposing (NewCard)
+import UtilsAndConstants.Api exposing (send, post, get)
 
 -- HEADERS
 
@@ -24,26 +23,22 @@ headers =
 
 getSavedCard : Cmd Msg
 getSavedCard =
-  Http.get mapToSavedCard (host ++ "/card")
-    |> Task.perform updateFail updateSuccess
+  get' "/card"
 
 saveCard : NewCard -> Cmd Msg
 saveCard card =
-  let
-    payload =
-      buildCardPayload card
-    request =
-      Request "POST" headers (host ++ "/card") payload
-  in
-    send request
+  post' "/card" (buildCardPayload card)
 
 -- HELPERS
 
-send : Request -> Cmd Msg
-send request =
-  Http.send defaultSettings request
-    |> Http.fromJson mapToSavedCard
-    |> Task.perform updateFail updateSuccess
+get' : String -> Cmd Msg
+get' url =
+  get url mapToSavedCard updateFail updateSuccess
+
+post' : String -> Http.Body -> Cmd Msg
+post' url payload =
+  post url payload mapToSavedCard updateFail updateSuccess
+
 
 updateFail : Http.Error -> Msg
 updateFail error =
