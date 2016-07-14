@@ -3,20 +3,18 @@ module Components.Menu.Api exposing (getMenu)
 -- CORE MODULES
 
 import Http
-import Task
 import Json.Decode exposing (..)
 
 -- OUR MODULES
 
 import Components.Menu.Types exposing (Msg(..), MenuResponse, MenuItemResponse)
-import App.Config exposing (host)
+import UtilsAndConstants.Api exposing (get)
 
 -- API CALLS
 
 getMenu : Cmd Msg
 getMenu =
-  Http.get mapToMenu (host ++ "/menu")
-    |> Task.perform updateFail updateSuccess
+  get "/menu" mapToMenu updateFail updateSuccess
 
 -- HELPERS
 
